@@ -8,6 +8,7 @@ uint8_t GetSize(const int2023_t& value) {
             lenght = i + 1;
         }
     }
+
     return lenght;
 }
 
@@ -20,6 +21,7 @@ int2023_t operator-(const int2023_t& value) {
     for (uint8_t i = 0; i < int2023_t::kMaxSizeNumber; ++i) {
         result.number[i] = ~value.number[i];
     }
+
     return result + from_int(1);
 }
 
@@ -47,6 +49,7 @@ int2023_t from_int(int32_t i) {
     if (index % int2023_t::kBase) {
         result.number[index / int2023_t::kBase] = buffer;
     }
+
     return is_negative ? -result : result;
 }
 
@@ -94,6 +97,7 @@ int2023_t from_string(const char* buff) {
     if (index_binary % int2023_t::kBase) {
         number_from_string.number[index_binary / int2023_t::kBase] = buffer_binary;
     }
+
     return is_negative ? -number_from_string : number_from_string;
 }
 
@@ -123,6 +127,7 @@ int2023_t operator+(const int2023_t& lhs, const int2023_t& rhs) {
         answer.number[i] = buffer;
         buffer = 0;
     }
+
     return answer;
 }
 
@@ -139,6 +144,7 @@ int2023_t MakeBinaryOffset(const int2023_t hs) {
             ans.number[i] ^= int2023_t::kOne;
         }
     }
+
     return ans;
 }
 
@@ -160,6 +166,7 @@ int2023_t operator*(const int2023_t& lhs, const int2023_t& rhs) {
             lhs_t = MakeBinaryOffset(lhs_t);
         }
     }
+
     return answer;
 }
 int2023_t DividingShortNumbers(int2023_t number, int divider) {
@@ -173,6 +180,7 @@ int2023_t DividingShortNumbers(int2023_t number, int divider) {
             carry = int2023_t::kMaxSizeUint8_tPlusOne;
         }
     }
+
     return answer;
 }
 
@@ -182,6 +190,7 @@ bool operator<(const int2023_t& lhs, const int2023_t& rhs) {
             return lhs.number[i] < rhs.number[i];
         }
     }
+
     return false;
 }
 
@@ -230,6 +239,7 @@ int2023_t operator/(const int2023_t& lhs, const int2023_t& rhs) {
             value = carry;
         }
     }
+
     return is_negative ? -ans : ans;
 }
 
@@ -239,6 +249,7 @@ bool operator==(const int2023_t& lhs, const int2023_t& rhs) {
             return false;
         }
     }
+
     return true;
 }
 
@@ -256,5 +267,6 @@ std::ostream& operator<<(std::ostream& stream, const int2023_t& value) {
             }
         }
     }
+
     return stream;
 }
